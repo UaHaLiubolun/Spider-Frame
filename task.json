@@ -1,0 +1,34 @@
+{
+    "taskId" : "xxx",
+    "site" : {
+        "domain" : "",
+        "cookie" : "",
+        "charset" : "",
+        "isProxy" : true,
+        "retryCount" : "",
+        "sleep" : 10
+    },
+    "url" : "",
+    "method" : "",
+    "requestBody" : {
+        "xx" : "",
+        "xxx" : ""
+    },
+    "rule" : {
+        "dataRule" : {
+            "action" : "",
+            "rules" : [{
+                "xPath" : "",
+                "filed" : ""
+            }]
+        },
+        "urlRule" : {
+            "rules" : [{
+                "xPath" : "",
+                "ruleId" : ""
+            }]
+        }
+
+    },
+    "function" : "com.xxx.xxx.xxx.xxx"
+}
