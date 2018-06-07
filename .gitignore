@@ -1,3 +1,7 @@
 .idea/
 /target
+/crawl/target
+/manage/target
+/crawl/crawl.iml
+/manage/manage.iml
 spider-frame.iml
