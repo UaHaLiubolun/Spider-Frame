@@ -4,4 +4,6 @@
 /manage/target
 /crawl/crawl.iml
 /manage/manage.iml
+/orm/orm.iml
+/orm/target
 spider-frame.iml

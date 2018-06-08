@@ -2,33 +2,48 @@
     "taskId" : "xxx",
     "site" : {
         "domain" : "",
-        "cookie" : "",
+        "userAgent" : "",
+        "cookies" : {
+            "xxx" : "xxx"
+        },
         "charset" : "",
         "isProxy" : true,
         "retryCount" : "",
-        "sleep" : 10
+        "sleep" : 10,
+        "headers" : {
+            "xxx" : ""
+        }
     },
-    "url" : "",
-    "method" : "",
-    "requestBody" : {
-        "xx" : "",
-        "xxx" : ""
+    "request" : {
+        "url" : "",
+        "method" : "",
+        "meta" : {
+            "xxx" : "xxx"
+        },
+        "requestBody" : {
+            "xx" : "",
+            "xxx" : ""
+        }
     },
     "rule" : {
-        "dataRule" : {
+        "dataRule" : [{
             "action" : "",
-            "rules" : [{
-                "xPath" : "",
-                "filed" : ""
+            "collection" : "",
+            "rules" : {
+                "xxx" : ""
+            }
+        }],
+        "urlRule" : [{
+                "ruleId" : "",
+                "request" : {
+                    "url" : "",
+                    "method" : "",
+                    "requestBody" : "",
+                    "meta" : {
+                        "xxx" : "xxx"
+                    }
+                }
             }]
-        },
-        "urlRule" : {
-            "rules" : [{
-                "xPath" : "",
-                "ruleId" : ""
-            }]
-        }
-
     },
     "function" : "com.xxx.xxx.xxx.xxx"
 }
