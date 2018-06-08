@@ -38,7 +38,7 @@
                 "request" : {
                     "url" : "",
                     "method" : "",
-                    "requestBody" : "",
+                    "requestBody" : {},
                     "meta" : {
                         "xxx" : "xxx"
                     }
