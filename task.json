@@ -1,49 +1,49 @@
 {
-    "taskId" : "xxx",
-    "site" : {
-        "domain" : "",
-        "userAgent" : "",
-        "cookies" : {
-            "xxx" : "xxx"
-        },
-        "charset" : "",
-        "isProxy" : true,
-        "retryCount" : "",
-        "sleep" : 10,
-        "headers" : {
-            "xxx" : ""
-        }
+  "taskId" : "xxx",
+  "site" : {
+    "domain" : "",
+    "userAgent" : "",
+    "cookies" : {
+      "xxx" : "xxx"
     },
-    "request" : {
+    "charset" : "",
+    "isProxy" : true,
+    "retryCount" : "",
+    "sleep" : 10,
+    "headers" : {
+      "xxx" : ""
+    }
+  },
+  "request" : {
+    "url" : "",
+    "method" : "",
+    "meta" : {
+      "xxx" : "xxx"
+    },
+    "requestBody" : {
+      "xx" : "",
+      "xxx" : ""
+    }
+  },
+  "rule" : {
+    "function" : "",
+    "dataRule" : [{
+      "action" : "",
+      "collection" : "",
+      "rules" : {
+        "xxx" : ""
+      }
+    }],
+    "urlRule" : [{
+      "ruleId" : "",
+      "request" : {
         "url" : "",
         "method" : "",
+        "requestBody" : {},
         "meta" : {
-            "xxx" : "xxx"
-        },
-        "requestBody" : {
-            "xx" : "",
-            "xxx" : ""
+          "xxx" : "xxx"
         }
-    },
-    "rule" : {
-        "dataRule" : [{
-            "action" : "",
-            "collection" : "",
-            "rules" : {
-                "xxx" : ""
-            }
-        }],
-        "urlRule" : [{
-                "ruleId" : "",
-                "request" : {
-                    "url" : "",
-                    "method" : "",
-                    "requestBody" : {},
-                    "meta" : {
-                        "xxx" : "xxx"
-                    }
-                }
-            }]
-    },
-    "function" : "com.xxx.xxx.xxx.xxx"
+      }
+    }]
+  }
 }
