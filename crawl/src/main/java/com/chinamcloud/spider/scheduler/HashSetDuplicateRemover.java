@@ -17,7 +17,7 @@ public class HashSetDuplicateRemover implements DuplicateRemover {
 
     @Override
     public boolean isDuplicate(Task task) {
-        return !urls.add(task.getUrl());
+        return !urls.add(task.getRequest().getUrl());
     }
 
 }
