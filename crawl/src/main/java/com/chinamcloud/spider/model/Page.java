@@ -1,6 +1,9 @@
 package com.chinamcloud.spider.model;
 
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.Serializable;
 
 public class Page implements Serializable{
@@ -10,6 +13,12 @@ public class Page implements Serializable{
     private Task task;
 
     private String rawText;
+
+    private Document document;
+
+    public Document getDocument() {
+        return Jsoup.parse(rawText);
+    }
 
     public Task getTask() {
         return task;
