@@ -18,6 +18,7 @@ public class Task implements Serializable{
 
     private Rule rule;
 
+
     public void success() {success = true;}
 
     public void error() {retryCount++;}

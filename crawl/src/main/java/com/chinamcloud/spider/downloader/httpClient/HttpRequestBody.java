@@ -1,4 +1,4 @@
-package com.chinamcloud.spider.model;
+package com.chinamcloud.spider.downloader.httpClient;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -34,7 +34,11 @@ public class HttpRequestBody implements Serializable {
     public HttpRequestBody(byte[] body, String contentType, String encoding) {
         this.body = body;
         this.contentType = contentType;
-        this.encoding = encoding;
+        if (encoding == null || encoding.equals("")) {
+            this.encoding = "utf-8";
+        } else {
+            this.encoding = encoding;
+        }
     }
 
     public String getContentType() {

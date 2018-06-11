@@ -1,47 +1,49 @@
 package com.chinamcloud.spider.mongo;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoJDBC {
 
     private static String host;
     private static int port;
-    private static String dataBase;
     private static String userName;
     private static String pw;
 
     static {
         host = "localhost";
-        port = 27018;
+        port = 27017;
         userName = "root";
-        dataBase = "spider";
         pw = "";
     }
 
 
-    static MongoClient mongoClient() {
-        if (pw.equals("") || pw == null) {
-            return new MongoClient(host, port);
-        }
-        ServerAddress serverAddress = new ServerAddress(host,port);
-        List<ServerAddress> addrs = new ArrayList<>();
-        addrs.add(serverAddress);
-        MongoCredential credential =
-                MongoCredential.createCredential(userName, dataBase, pw == null ? null : pw.toCharArray());
-        List<MongoCredential> credentials = new ArrayList<>();
-        credentials.add(credential);
-        //通过连接认证获取MongoDB连接
-        MongoClient mongoClient = new MongoClient(addrs,credentials);
+    public static MongoClient mongoClient() {
+        CodecRegistry codecRegistry =  fromRegistries(com.mongodb.MongoClient.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(host, port))))
+                .codecRegistry(codecRegistry)
+                .build();
+        com.mongodb.client.MongoClient mongoClient = MongoClients.create(settings);
         return mongoClient;
     }
 
 
-    static MongoDatabase getDataBase(String dataBase) {
+    public static MongoDatabase getDataBase(String dataBase) {
         try {
             return mongoClient().getDatabase(dataBase);
         } catch (Exception e) {

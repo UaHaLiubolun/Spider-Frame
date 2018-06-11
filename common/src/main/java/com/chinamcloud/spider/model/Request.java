@@ -7,14 +7,35 @@ public class Request {
 
     private String url;
 
-    private String method;
+    private String method = "get";
 
     private Map<String, String> meta;
 
-    private HttpRequestBody requestBody;
+    // 加入池子前是否去重
+    private boolean isDuplicate = true;
+
+    private String contentType;
+
+    private String requestBody;
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
 
     public String getUrl() {
         return url;
+    }
+
+    public boolean isDuplicate() {
+        return isDuplicate;
+    }
+
+    public void setDuplicate(boolean duplicate) {
+        isDuplicate = duplicate;
     }
 
     public void setUrl(String url) {
@@ -37,11 +58,11 @@ public class Request {
         this.meta = meta;
     }
 
-    public HttpRequestBody getRequestBody() {
+    public String getRequestBody() {
         return requestBody;
     }
 
-    public void setRequestBody(HttpRequestBody requestBody) {
+    public void setRequestBody(String requestBody) {
         this.requestBody = requestBody;
     }
 }

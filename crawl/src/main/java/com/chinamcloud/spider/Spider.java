@@ -2,6 +2,8 @@ package com.chinamcloud.spider;
 
 import com.chinamcloud.spider.downloader.Downloader;
 import com.chinamcloud.spider.downloader.httpClient.HttpClientDownloader;
+import com.chinamcloud.spider.filter.DefaultFilter;
+import com.chinamcloud.spider.filter.PageFilter;
 import com.chinamcloud.spider.model.Page;
 import com.chinamcloud.spider.model.Task;
 import com.chinamcloud.spider.scheduler.core.DuplicateRemoverScheduler;
@@ -48,15 +50,15 @@ public class Spider implements Runnable{
         while (!Thread.currentThread().isInterrupted()) {
             final Task task = scheduler.poll();
             if (task == null && threadPool.getThreadAlive().get() == 0) {
-                threadPool.shutdown();
-                // 判断是否时停止
-                break;
+//                threadPool.shutdown();
+//                // 判断是否时停止
+//                break;
             } else {
                 threadPool.execute(() -> {
                     try {
                         if (task == null) return;
-                        processTask(task);
                         if (task.getSite().getSleep() != 0) Thread.sleep(task.getSite().getSleep());
+                        processTask(task);
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
@@ -73,8 +75,19 @@ public class Spider implements Runnable{
         while (!task.isSuccess() && task.getRetryCount() <= task.getSite().getRetryCount()) {
             page = downloader.download(task);
         }
-//        onDownloadSuccess(task, page);
+        getFilter(task).filter(task, page);
     }
+
+
+    private PageFilter getFilter(Task task) {
+        if (task.getRule().getFilter() == null || task.getRule().getFilter().equals("")) {
+            return  new DefaultFilter();
+        } else {
+            return new DefaultFilter();
+        }
+    }
+
+
 
 //    private void onDownloadSuccess(Task task, Page page) {
 //        task.getRequest().getFilter().filter(page);

@@ -12,6 +12,20 @@ public class DuplicateRemoverScheduler implements DuplicateRemover, Scheduler {
 
     private DuplicateRemover duplicateRemover;
 
+    public static DuplicateRemoverScheduler get() {
+        return new DuplicateRemoverScheduler();
+    }
+
+    public DuplicateRemoverScheduler setScheduler(Scheduler scheduler) {
+        this.scheduler = scheduler;
+        return this;
+    }
+
+    public DuplicateRemoverScheduler setDuplicateRemover(DuplicateRemover duplicateRemover) {
+        this.duplicateRemover = duplicateRemover;
+        return this;
+    }
+
     public DuplicateRemoverScheduler(Scheduler scheduler, DuplicateRemover duplicateRemover) {
         this.scheduler = scheduler;
         this.duplicateRemover = duplicateRemover;
@@ -24,7 +38,9 @@ public class DuplicateRemoverScheduler implements DuplicateRemover, Scheduler {
 
     @Override
     public void push(Task task) {
-        if (!isDuplicate(task)) scheduler.push(task);
+        if(task.getRequest().isDuplicate()) {
+            if (!isDuplicate(task)) scheduler.push(task);
+        } else scheduler.push(task);
     }
 
     @Override
@@ -37,4 +53,5 @@ public class DuplicateRemoverScheduler implements DuplicateRemover, Scheduler {
     public boolean isDuplicate(Task task) {
         return duplicateRemover.isDuplicate(task);
     }
+
 }

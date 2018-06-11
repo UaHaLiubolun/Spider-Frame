@@ -117,8 +117,10 @@ public class HttpRequestConvert {
      */
     private RequestBuilder addFormParams(RequestBuilder requestBuilder, Task task) {
         if (task.getRequest().getRequestBody() != null) {
-            ByteArrayEntity entity = new ByteArrayEntity(task.getRequest().getRequestBody().getBody());
-            entity.setContentType(task.getRequest().getRequestBody().getContentType());
+            HttpRequestBody httpRequestBody =
+                    HttpRequestBodyGenerator.generator(task.getRequest(), task.getSite().getCharset());
+            ByteArrayEntity entity = new ByteArrayEntity(httpRequestBody.getBody());
+            entity.setContentType(task.getRequest().getContentType());
             requestBuilder.setEntity(entity);
         }
         return requestBuilder;

@@ -6,4 +6,6 @@
 /manage/manage.iml
 /orm/orm.iml
 /orm/target
+/common/target/
+/common/common.iml
 spider-frame.iml

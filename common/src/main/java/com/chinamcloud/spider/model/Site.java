@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Site implements Serializable{
 
+    private String siteId;
     // 域名
     private String domain;
     // userAgent
@@ -24,6 +25,14 @@ public class Site implements Serializable{
     private Map<String, String> headers;
     // 超时时间
     private int timeOut = 5000;
+
+    public String getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(String siteId) {
+        this.siteId = siteId;
+    }
 
     public int getTimeOut() {
         return timeOut;

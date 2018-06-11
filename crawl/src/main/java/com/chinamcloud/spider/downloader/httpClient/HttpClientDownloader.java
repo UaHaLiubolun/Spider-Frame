@@ -87,7 +87,6 @@ public class HttpClientDownloader implements Downloader {
         byte[] bytes = IOUtils.toByteArray(httpResponse.getEntity().getContent());
         Page page = new Page();
         page.setRawText(new String(bytes, task.getSite().getCharset()));
-        page.setTask(task);
         return page;
     }
 

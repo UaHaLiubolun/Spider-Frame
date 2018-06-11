@@ -9,7 +9,7 @@ import redis.clients.jedis.Jedis;
 public class RedisSetDuplicateRemover implements DuplicateRemover {
 
 
-    private static String SET_PREFIX = "set";
+    private static String SET_PREFIX = "spider-url";
 
     @Override
     public boolean isDuplicate(Task task) {

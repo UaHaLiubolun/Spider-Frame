@@ -12,6 +12,7 @@
         <module>crawl</module>
         <module>manage</module>
         <module>orm</module>
+        <module>common</module>
     </modules>
 
     <dependencyManagement>

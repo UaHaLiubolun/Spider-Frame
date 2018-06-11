@@ -9,7 +9,7 @@ import redis.clients.jedis.Jedis;
 
 public class RedisQueueScheduler implements Scheduler{
 
-    private static String QUEUE_PREFIX = "queue";
+    private static String QUEUE_PREFIX = "spider-queue";
 
     @Override
     public void push(Task task) {
