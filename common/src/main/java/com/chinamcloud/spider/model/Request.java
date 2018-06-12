@@ -1,7 +1,6 @@
 package com.chinamcloud.spider.model;
 
 
-import java.util.Map;
 
 public class Request {
 
@@ -9,24 +8,12 @@ public class Request {
 
     private String method = "get";
 
-    private Map<String, String> meta;
-
     // 加入池子前是否去重
     private boolean isDuplicate = true;
 
     private String contentType;
 
     private String requestBody;
-
-    private String urlId;
-
-    public String getUrlId() {
-        return urlId;
-    }
-
-    public void setUrlId(String urlId) {
-        this.urlId = urlId;
-    }
 
     public String getContentType() {
         return contentType;
@@ -58,14 +45,6 @@ public class Request {
 
     public void setMethod(String method) {
         this.method = method;
-    }
-
-    public Map<String, String> getMeta() {
-        return meta;
-    }
-
-    public void setMeta(Map<String, String> meta) {
-        this.meta = meta;
     }
 
     public String getRequestBody() {

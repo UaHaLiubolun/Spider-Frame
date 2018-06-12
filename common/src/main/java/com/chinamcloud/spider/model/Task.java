@@ -16,9 +16,6 @@ public class Task implements Serializable{
 
     private int retryCount = 0;
 
-    private Rule rule;
-
-
     public void success() {success = true;}
 
     public void error() {retryCount++;}
@@ -56,19 +53,4 @@ public class Task implements Serializable{
         this.request = request;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public void setRetryCount(int retryCount) {
-        this.retryCount = retryCount;
-    }
-
-    public Rule getRule() {
-        return rule;
-    }
-
-    public void setRule(Rule rule) {
-        this.rule = rule;
-    }
 }

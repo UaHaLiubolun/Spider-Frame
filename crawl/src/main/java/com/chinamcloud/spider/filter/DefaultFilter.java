@@ -4,24 +4,57 @@ import com.chinamcloud.spider.dao.MapDao;
 import com.chinamcloud.spider.model.*;
 import com.chinamcloud.spider.selector.Selectable;
 import com.chinamcloud.spider.util.ValidateUtil;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DefaultFilter implements PageFilter {
 
 
     @Override
     public void filter(Task task, Page page) {
-        Rule rule = task.getRule();
-
-        //判断是否自定义filter
-        if (rule.getFilter() != null && !rule.getFilter().equals("")) {
-            // todo 非必要功能后面添加
+        Site site = task.getSite();
+        if (isTargetUrl(task)) {
+            dataRule(site.getDataRules(), page);
+            addTarget(task, page);
         } else {
-            dataRule(rule.getDataRules(), page);
-            urlUrl(rule.getUrlRules(), page);
+            addRequest(task, page);
+            addTarget(task, page);
         }
+    }
+
+    private boolean isTargetUrl(Task task) {
+        Pattern pattern = Pattern.compile(task.getSite().getTargetUrl());
+        Matcher matcher = pattern.matcher(task.getRequest().getUrl());
+        return matcher.find();
+    }
+
+    private void addTarget(Task task, Page page) {
+        List<String> targetUrls = page.getHtml().links().regex(task.getSite().getTargetUrl()).all();
+        addRequest(targetUrls, page, true);
+    }
+
+    private void addRequest(Task task, Page page) {
+        List<String> urls = task.getSite().getHelpUrl();
+        if (urls == null || urls.size() == 0) return;
+        List<String> strings = new ArrayList<>();
+        urls.stream().forEach(url -> {
+             strings.addAll(page.getHtml().links().regex(url).all());
+        });
+        addRequest(strings, page, true);
+    }
+
+    private void addRequest(List<String> urls, Page page, boolean isDuplicate) {
+        urls.stream().forEach(string -> {
+            Request request = new Request();
+            request.setUrl(string);
+            request.setDuplicate(isDuplicate);
+            page.addRequest(request);
+        });
     }
 
 
@@ -35,33 +68,6 @@ public class DefaultFilter implements PageFilter {
         }
     }
 
-    private void urlUrl(List<UrlRule> rules, Page page) {
-        for (int i = 0; i < rules.size(); i++) {
-            UrlRule urlRule = rules.get(i);
-            if (urlRule.getUrl().getNum() == -1) {
-                List<String> urls = (List<String>) getExtract(urlRule.getUrl(), page);
-                if (ValidateUtil.notNull(urls)) {
-                    addRequest(urlRule.getUrlId(), urls, page);
-                }
-            } else {
-                String url = (String) getExtract(urlRule.getUrl(), page);
-                if (ValidateUtil.notNull(url)) {
-                    addRequest(urlRule.getUrlId(), url, page);
-                }
-            }
-        }
-    }
-
-    private void addRequest(String urlId, List<String> strings, Page page) {
-        strings.stream().forEach((string) -> addRequest(urlId, string, page));
-    }
-
-    private void addRequest(String urlId, String url, Page page) {
-        Request request = new Request();
-        request.setUrl(url);
-        request.setUrlId(urlId);
-        page.addRequest(request);
-    }
 
     private Map<String, Object> getExtracts(List<Extract> extracts, Page page) {
         Map<String, Object> result = new HashMap<>();
@@ -105,13 +111,8 @@ public class DefaultFilter implements PageFilter {
 
     private Object regex(Extract extract, Page page) {
         Selectable selectable =  page.getHtml().links().regex(extract.getExpression());
-        if (extract.getNum() == -1) {
-            return selectable.all();
-        } else {
-            return selectable.toString();
-        }
+        return selectable.all();
     }
-
 
 
 

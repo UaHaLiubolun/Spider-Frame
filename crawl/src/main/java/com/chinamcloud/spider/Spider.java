@@ -1,20 +1,16 @@
 package com.chinamcloud.spider;
 
-import com.chinamcloud.spider.dao.UrlDao;
 import com.chinamcloud.spider.downloader.Downloader;
 import com.chinamcloud.spider.downloader.httpClient.HttpClientDownloader;
 import com.chinamcloud.spider.filter.DefaultFilter;
 import com.chinamcloud.spider.filter.PageFilter;
-import com.chinamcloud.spider.model.Page;
-import com.chinamcloud.spider.model.Request;
-import com.chinamcloud.spider.model.Task;
-import com.chinamcloud.spider.model.Url;
+import com.chinamcloud.spider.model.*;
 import com.chinamcloud.spider.scheduler.core.DuplicateRemoverScheduler;
 import com.chinamcloud.spider.thread.CountableThreadPool;
 import com.chinamcloud.spider.util.TaskUtil;
-
 import java.util.Date;
 import java.util.List;
+
 
 public class Spider implements Runnable{
 
@@ -80,17 +76,13 @@ public class Spider implements Runnable{
         while (!task.isSuccess() && task.getRetryCount() <= task.getSite().getRetryCount()) {
             page = downloader.download(task);
         }
-        getFilter(task).filter(task, page);
+        getFilter().filter(task, page);
         addTask(task, page);
     }
 
 
-    private PageFilter getFilter(Task task) {
-        if (task.getRule().getFilter() == null || task.getRule().getFilter().equals("")) {
-            return  new DefaultFilter();
-        } else {
-            return new DefaultFilter();
-        }
+    private PageFilter getFilter() {
+        return new DefaultFilter();
     }
 
     private void addTask(Task task, Page page) {
@@ -109,13 +101,6 @@ public class Spider implements Runnable{
         task1.setTaskId(TaskUtil.generatorId(request.getUrl()));
         task1.setSite(task.getSite());
         task1.setRequest(request);
-        if (request.getUrlId() != null) {
-            UrlDao urlDao = new UrlDao();
-            Url url = urlDao.getById(request.getUrlId());
-            if (url != null) {
-                task1.setRule(url.getRule());
-            }
-        }
         return task1;
     }
 

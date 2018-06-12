@@ -2,6 +2,7 @@ package com.chinamcloud.spider.model;
 
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 public class Site implements Serializable{
@@ -25,6 +26,47 @@ public class Site implements Serializable{
     private Map<String, String> headers;
     // 超时时间
     private int timeOut = 5000;
+
+    private String startUrl;
+
+
+    private String targetUrl;
+
+    private List<String> helpUrl;
+
+    private List<DataRule> dataRules;
+
+    public String getStartUrl() {
+        return startUrl;
+    }
+
+    public void setStartUrl(String startUrl) {
+        this.startUrl = startUrl;
+    }
+
+    public List<DataRule> getDataRules() {
+        return dataRules;
+    }
+
+    public void setDataRules(List<DataRule> dataRules) {
+        this.dataRules = dataRules;
+    }
+
+    public String getTargetUrl() {
+        return targetUrl;
+    }
+
+    public void setTargetUrl(String targetUrl) {
+        this.targetUrl = targetUrl;
+    }
+
+    public List<String> getHelpUrl() {
+        return helpUrl;
+    }
+
+    public void setHelpUrl(List<String> helpUrl) {
+        this.helpUrl = helpUrl;
+    }
 
     public String getSiteId() {
         return siteId;

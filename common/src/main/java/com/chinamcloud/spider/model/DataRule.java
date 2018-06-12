@@ -5,19 +5,9 @@ import java.util.List;
 
 public class DataRule {
 
-    private String action;
-
     private String collection;
 
     private List<Extract> extracts;
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
 
     public String getCollection() {
         return collection;

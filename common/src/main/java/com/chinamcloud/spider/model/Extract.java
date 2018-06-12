@@ -2,34 +2,12 @@ package com.chinamcloud.spider.model;
 
 
 public class Extract {
-
     // 解析类型
-    private String resolver;
-
+    private String resolver = "xpath";
+    // 字段
     private String filed;
-
     // 表达式
     private String expression;
-
-    private int num = 1;
-
-    private String ability = "text";
-
-    public String getAbility() {
-        return ability;
-    }
-
-    public void setAbility(String ability) {
-        this.ability = ability;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
 
     public String getResolver() {
         return resolver;
