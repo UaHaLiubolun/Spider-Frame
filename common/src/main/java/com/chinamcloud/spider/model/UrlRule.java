@@ -1,11 +1,16 @@
 package com.chinamcloud.spider.model;
 
+import java.util.List;
 
 public class UrlRule {
 
     private String urlId;
 
-    private Request request;
+    private Extract url;
+
+    private String method;
+
+    private List<Extract> requestBody;
 
     public String getUrlId() {
         return urlId;
@@ -15,11 +20,27 @@ public class UrlRule {
         this.urlId = urlId;
     }
 
-    public Request getRequest() {
-        return request;
+    public Extract getUrl() {
+        return url;
     }
 
-    public void setRequest(Request request) {
-        this.request = request;
+    public void setUrl(Extract url) {
+        this.url = url;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public List<Extract> getRequestBody() {
+        return requestBody;
+    }
+
+    public void setRequestBody(List<Extract> requestBody) {
+        this.requestBody = requestBody;
     }
 }

@@ -18,6 +18,16 @@ public class Request {
 
     private String requestBody;
 
+    private String urlId;
+
+    public String getUrlId() {
+        return urlId;
+    }
+
+    public void setUrlId(String urlId) {
+        this.urlId = urlId;
+    }
+
     public String getContentType() {
         return contentType;
     }

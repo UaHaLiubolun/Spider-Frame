@@ -2,14 +2,11 @@ package com.chinamcloud.spider.dao;
 
 
 import com.chinamcloud.spider.model.MUrl;
-import com.chinamcloud.spider.model.Url;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-
-import java.nio.channels.MulticastChannel;
+import static com.mongodb.client.model.Filters.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UrlDao extends Dao{
 
@@ -23,6 +20,16 @@ public class UrlDao extends Dao{
             e.printStackTrace();
         }
         return false;
+    }
+
+    public MUrl getById(String id) {
+        MUrl mUrl = null;
+        try {
+            mUrl = collection.find(eq("urlId", id)).first();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mUrl;
     }
 
     public List<MUrl> getAll() {

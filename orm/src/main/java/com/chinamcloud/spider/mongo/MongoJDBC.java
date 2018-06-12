@@ -1,5 +1,6 @@
 package com.chinamcloud.spider.mongo;
 
+import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoClient;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
@@ -12,6 +13,7 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -23,6 +25,7 @@ public class MongoJDBC {
     private static String userName;
     private static String pw;
 
+    private static com.mongodb.client.MongoClient client;
     static {
         host = "localhost";
         port = 27017;
@@ -32,14 +35,17 @@ public class MongoJDBC {
 
 
     public static MongoClient mongoClient() {
+        if (client != null) return client;
         CodecRegistry codecRegistry =  fromRegistries(com.mongodb.MongoClient.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(host, port))))
                 .codecRegistry(codecRegistry)
+                .applyToSocketSettings(builder -> builder.connectTimeout(60, TimeUnit.SECONDS))
+                .applyToConnectionPoolSettings(builder -> builder.maxConnectionIdleTime(60, TimeUnit.SECONDS))
                 .build();
-        com.mongodb.client.MongoClient mongoClient = MongoClients.create(settings);
-        return mongoClient;
+        client = MongoClients.create(settings);
+        return client;
     }
 
 

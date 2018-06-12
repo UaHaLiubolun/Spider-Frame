@@ -24,7 +24,7 @@ public class Manage {
         mUrls.stream().forEach(
                 mUrl -> {
                     Task task = TaskConvert.convert(mUrl);
-                    for (int i = 0; i < 10000000; i++) {
+                    for (int i = 0; i < 1; i++) {
                         RedisUtil.pushList("spider-queue", JSON.toJSONString(task));
                     }
                 }

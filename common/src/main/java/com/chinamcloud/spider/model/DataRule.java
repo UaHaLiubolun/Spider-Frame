@@ -1,7 +1,7 @@
 package com.chinamcloud.spider.model;
 
 
-import java.util.Map;
+import java.util.List;
 
 public class DataRule {
 
@@ -9,7 +9,7 @@ public class DataRule {
 
     private String collection;
 
-    private Map<String, String> rules;
+    private List<Extract> extracts;
 
     public String getAction() {
         return action;
@@ -27,11 +27,11 @@ public class DataRule {
         this.collection = collection;
     }
 
-    public Map<String, String> getRules() {
-        return rules;
+    public List<Extract> getExtracts() {
+        return extracts;
     }
 
-    public void setRules(Map<String, String> rules) {
-        this.rules = rules;
+    public void setExtracts(List<Extract> extracts) {
+        this.extracts = extracts;
     }
 }

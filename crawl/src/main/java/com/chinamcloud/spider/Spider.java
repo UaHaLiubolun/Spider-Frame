@@ -1,15 +1,20 @@
 package com.chinamcloud.spider;
 
+import com.chinamcloud.spider.dao.UrlDao;
 import com.chinamcloud.spider.downloader.Downloader;
 import com.chinamcloud.spider.downloader.httpClient.HttpClientDownloader;
 import com.chinamcloud.spider.filter.DefaultFilter;
 import com.chinamcloud.spider.filter.PageFilter;
 import com.chinamcloud.spider.model.Page;
+import com.chinamcloud.spider.model.Request;
 import com.chinamcloud.spider.model.Task;
+import com.chinamcloud.spider.model.Url;
 import com.chinamcloud.spider.scheduler.core.DuplicateRemoverScheduler;
 import com.chinamcloud.spider.thread.CountableThreadPool;
+import com.chinamcloud.spider.util.TaskUtil;
 
 import java.util.Date;
+import java.util.List;
 
 public class Spider implements Runnable{
 
@@ -76,6 +81,7 @@ public class Spider implements Runnable{
             page = downloader.download(task);
         }
         getFilter(task).filter(task, page);
+        addTask(task, page);
     }
 
 
@@ -87,29 +93,32 @@ public class Spider implements Runnable{
         }
     }
 
+    private void addTask(Task task, Page page) {
+        List<Request> requests = page.getRequests();
+        if (requests == null || requests.size() == 0) return;
+        requests.stream().forEach(
+                request -> {
+                    Task task1  = generatorTask(request, task);
+                    scheduler.push(task1);
+                }
+        );
+    }
 
+    private Task generatorTask(Request request, Task task) {
+        Task task1 = new Task();
+        task1.setTaskId(TaskUtil.generatorId(request.getUrl()));
+        task1.setSite(task.getSite());
+        task1.setRequest(request);
+        if (request.getUrlId() != null) {
+            UrlDao urlDao = new UrlDao();
+            Url url = urlDao.getById(request.getUrlId());
+            if (url != null) {
+                task1.setRule(url.getRule());
+            }
+        }
+        return task1;
+    }
 
-//    private void onDownloadSuccess(Task task, Page page) {
-//        task.getRequest().getFilter().filter(page);
-//        if (page.getPipelines() != null) {
-//            for (Pipeline pipeline : page.getPipelines()) {
-//                pipeline.save(page);
-//            }
-//        }
-//        addPageTask(page);
-//    }
-//
-//    private void addPageTask(Page page) {
-//        if (page.getNewRequests() == null) return;
-//        for (Request request : page.getNewRequests()) {
-//            Task task = new Task(site, request);
-//            addTask(task);
-//        }
-//    }
-//
-//    private void addTask(Task task) {
-//        scheduler.push(task);
-//    }
 }
 
 

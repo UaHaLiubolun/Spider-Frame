@@ -6,7 +6,7 @@ import com.chinamcloud.spider.scheduler.core.DuplicateRemoverScheduler;
 public class SpiderTest {
 
     public static void main(String[] args) {
-        Spider spider = new Spider(4);
+        Spider spider = new Spider(1);
         DuplicateRemoverScheduler duplicateRemoverScheduler
                 = DuplicateRemoverScheduler.get()
                 .setScheduler(new RedisQueueScheduler())
