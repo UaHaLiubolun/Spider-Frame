@@ -20,11 +20,10 @@ public class DefaultFilter implements PageFilter {
         Site site = task.getSite();
         if (isTargetUrl(task)) {
             dataRule(site.getDataRules(), page);
-            addTarget(task, page);
         } else {
             addRequest(task, page);
-            addTarget(task, page);
         }
+        addTarget(task, page);
     }
 
     private boolean isTargetUrl(Task task) {
@@ -74,7 +73,6 @@ public class DefaultFilter implements PageFilter {
         extracts.stream().forEach(extract -> {
             Object value = getExtract(extract, page);
             if (ValidateUtil.notNull(value)) {
-                System.out.println(value);
                 result.put(extract.getFiled(), value);
             }
         });
