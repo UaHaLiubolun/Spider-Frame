@@ -21,7 +21,7 @@ public class Manage {
     public static void main(String[] args) {
         Manage manage = new Manage();
         List<MSite> mSites = manage.siteDao.getAll();
-        mSites.stream().forEach(
+        mSites.stream().filter(mSite -> !mSite.getSiteId().equals("sina")).forEach(
                 mSite -> {
                     Task task = TaskConvert.convert(mSite);
                     for (int i = 0; i < 1; i++) {

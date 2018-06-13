@@ -59,6 +59,9 @@ public class UrlUtils {
     }
 
     public static String fixIllegalCharacterInUrl(String url) {
+        if(!url.contains("http")) {
+            url = "http://" + url;
+        }
         //TODO more charator support
         return url.replace(" ", "%20").replaceAll("#+", "#");
     }

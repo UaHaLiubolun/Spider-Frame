@@ -21,7 +21,7 @@ public class DefaultFilter implements PageFilter {
         if (isTargetUrl(task)) {
             dataRule(site.getDataRules(), page);
         } else {
-            addRequest(task, page);
+            addHelpUrl(task, page);
         }
         addTarget(task, page);
     }
@@ -37,7 +37,7 @@ public class DefaultFilter implements PageFilter {
         addRequest(targetUrls, page, true);
     }
 
-    private void addRequest(Task task, Page page) {
+    private void addHelpUrl(Task task, Page page) {
         List<String> urls = task.getSite().getHelpUrl();
         if (urls == null || urls.size() == 0) return;
         List<String> strings = new ArrayList<>();
