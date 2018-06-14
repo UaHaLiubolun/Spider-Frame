@@ -1,6 +1,7 @@
 import com.chinamcloud.spider.ConfigSpider;
 import com.chinamcloud.spider.model.Extract;
 import com.chinamcloud.spider.model.PageModel;
+import com.chinamcloud.spider.pipeline.MongoPipeline;
 import com.chinamcloud.spider.redis.RedisPool;
 import com.chinamcloud.spider.scheduler.RedisScheduler;
 import us.codecraft.webmagic.Site;
@@ -14,12 +15,12 @@ public class SoHuNewsTest {
 
         PageModel pageModel = new PageModel();
         pageModel.setTargetUrl(Arrays.asList("www.sohu.com/a/\\d+_\\d+"));
-        pageModel.setHelpUrl(Arrays.asList("http://www.sohu.com/c/\\d+/\\d+"));
+        pageModel.setHelpUrl(Arrays.asList("http://www.sohu.com/c/\\d+/\\d+", "http://w+.sohu.com"));
         Extract extract = new Extract();
         extract.setFiled("title");
         extract.setValue("//h1/text()");
         pageModel.setExtracts(Arrays.asList(extract));
-        ConfigSpider.create(Site.me().setSleepTime(0), pageModel)
+        ConfigSpider.create(Site.me().setSleepTime(0),new MongoPipeline(), pageModel)
                 .setScheduler(new RedisScheduler(RedisPool.jedisPool()))
                 .addUrl("http://news.sohu.com/")
                 .start();
@@ -32,7 +33,7 @@ public class SoHuNewsTest {
         extractSina.setFiled("title");
         extractSina .setValue("//h1[@class='main-title']/text()");
         pageModelSina.setExtracts(Arrays.asList(extractSina));
-        ConfigSpider.create(Site.me().setSleepTime(0), pageModelSina)
+        ConfigSpider.create(Site.me().setSleepTime(0),new MongoPipeline(), pageModelSina)
                 .setScheduler(new RedisScheduler(RedisPool.jedisPool()))
                 .addUrl("http://news.sina.com.cn")
                 .runAsync();
