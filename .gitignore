@@ -8,4 +8,8 @@
 /orm/target
 /common/target/
 /common/common.iml
+/spider-core/spider-core.iml
+/spider-core/target/
+/spider-config/spider-config.iml
+/spider-config/target/
 spider-frame.iml
