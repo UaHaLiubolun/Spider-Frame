@@ -37,5 +37,20 @@ public class SoHuNewsTest {
                 .setScheduler(new RedisScheduler(RedisPool.jedisPool()))
                 .addUrl("http://news.sina.com.cn")
                 .runAsync();
+
+        PageModel pageModelHuPu = new PageModel();
+        pageModelHuPu.setTargetUrl(Arrays.asList("https://bbs.hupu.com/\\d+.html"));
+        pageModelHuPu.setHelpUrl(Arrays.asList("https://bbs.hupu.com/\\[a-z]+"));
+        Extract extractHuPu = new Extract();
+        extractHuPu.setFiled("title");
+        extractHuPu .setValue("//title/text()");
+        Extract extractHuPuContent = new Extract();
+        extractHuPuContent.setFiled("content");
+        extractHuPuContent .setValue("//div[@class='quote-content']/tidyText()");
+        pageModelHuPu.setExtracts(Arrays.asList(extractHuPu, extractHuPuContent));
+        ConfigSpider.create(Site.me().setSleepTime(0),new MongoPipeline(), pageModelHuPu)
+                .setScheduler(new RedisScheduler(RedisPool.jedisPool()))
+                .addUrl("https://bbs.hupu.com/all-gambia")
+                .runAsync();
     }
 }
