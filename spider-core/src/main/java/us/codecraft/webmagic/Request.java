@@ -24,6 +24,16 @@ public class Request implements Serializable {
 
     private String method;
 
+    private boolean extractLinks = true;
+
+    public boolean isExtractLinks() {
+        return extractLinks;
+    }
+
+    public void setExtractLinks(boolean extractLinks) {
+        this.extractLinks = extractLinks;
+    }
+
     private HttpRequestBody requestBody;
 
     /**
@@ -52,6 +62,11 @@ public class Request implements Serializable {
     private boolean binaryContent = false;
 
     private String charset;
+
+    public Request(String url, boolean extractLinks) {
+        this.url = url;
+        this.extractLinks = extractLinks;
+    }
 
     public Request() {
     }

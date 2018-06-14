@@ -60,6 +60,10 @@ public final class RedisPool {
         }
     }
 
+    public synchronized static JedisPool jedisPool() {
+        return jedisPool;
+    }
+
     /**
      * 释放Jedis
      * @param jedis
