@@ -1,6 +1,5 @@
 package com.chinamcloud.spider;
 
-
 import com.chinamcloud.spider.model.PageModel;
 import com.chinamcloud.spider.pipeline.ConfigPipeline;
 import com.chinamcloud.spider.pipeline.ConsolePipeLine;

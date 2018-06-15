@@ -1,49 +1,9 @@
 {
-  "taskId" : "xxx",
-  "site" : {
-    "domain" : "",
-    "userAgent" : "",
-    "cookies" : {
-      "xxx" : "xxx"
-    },
-    "charset" : "",
-    "isProxy" : true,
-    "retryCount" : "",
-    "sleep" : 10,
-    "headers" : {
-      "xxx" : ""
-    }
-  },
-  "request" : {
-    "url" : "",
-    "method" : "",
-    "meta" : {
-      "xxx" : "xxx"
-    },
-    "requestBody" : {
-      "xx" : "",
-      "xxx" : ""
-    }
-  },
-  "rule" : {
-    "filter" : "",
-    "dataRule" : [{
-      "action" : "",
-      "collection" : "",
-      "rules" : {
-        "xxx" : ""
-      }
-    }],
-    "urlRule" : [{
-      "ruleId" : "",
-      "request" : {
-        "url" : "",
-        "method" : "",
-        "requestBody" : {},
-        "meta" : {
-          "xxx" : "xxx"
-        }
-      }
-    }]
-  }
+  "site": {},
+  "pageModel": [{}],
+  "thread": 1,
+  "startUrl": ["",""],
+  "interval": 1000,
+  "lastTime": 12312,
+  "isOn": true
 }
