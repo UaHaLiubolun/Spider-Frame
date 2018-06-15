@@ -1,4 +1,4 @@
-package com.chinamcloud.spider.redis;
+package com.chinamcloud.spider.orm.redis;
 
 
 import redis.clients.jedis.Jedis;

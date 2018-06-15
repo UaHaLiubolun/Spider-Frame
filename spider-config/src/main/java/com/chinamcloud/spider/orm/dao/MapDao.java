@@ -1,11 +1,11 @@
-package com.chinamcloud.spider.dao;
+package com.chinamcloud.spider.orm.dao;
 
 
 import com.mongodb.client.MongoCollection;
 
 import java.util.Map;
 
-public class MapDao extends Dao{
+public class MapDao extends Dao {
 
     private MongoCollection<Map> collection;
 

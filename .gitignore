@@ -12,4 +12,6 @@
 /spider-core/target/
 /spider-config/spider-config.iml
 /spider-config/target/
+/spider-manage/target/
+/spider-manage/spider-manage.iml
 spider-frame.iml

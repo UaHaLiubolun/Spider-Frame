@@ -1,7 +1,7 @@
 package com.chinamcloud.spider.pipeline;
 
 
-import com.chinamcloud.spider.dao.MapDao;
+import com.chinamcloud.spider.orm.dao.MapDao;
 import us.codecraft.webmagic.Task;
 
 import java.util.Map;

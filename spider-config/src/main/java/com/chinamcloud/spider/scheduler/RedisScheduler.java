@@ -141,7 +141,7 @@ public class RedisScheduler extends DuplicateRemovedScheduler implements Monitor
             Long size = jedis.llen(getQueueKey(task));
             return size.intValue();
         } finally {
-            pool.returnResource(jedis);
+            jedis.close();
         }
     }
 
@@ -152,7 +152,7 @@ public class RedisScheduler extends DuplicateRemovedScheduler implements Monitor
             Long size = jedis.scard(getSetKey(task));
             return size.intValue();
         } finally {
-            pool.returnResource(jedis);
+            jedis.close();
         }
     }
 

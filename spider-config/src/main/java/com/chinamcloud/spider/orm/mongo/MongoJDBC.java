@@ -1,18 +1,14 @@
-package com.chinamcloud.spider.mongo;
+package com.chinamcloud.spider.orm.mongo;
 
-import com.mongodb.MongoClientOptions;
 import com.mongodb.client.MongoClient;
 import com.mongodb.MongoClientSettings;
-import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -25,7 +21,7 @@ public class MongoJDBC {
     private static String userName;
     private static String pw;
 
-    private static com.mongodb.client.MongoClient client;
+    private static MongoClient client;
     static {
         host = "localhost";
         port = 27017;

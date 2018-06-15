@@ -1,16 +1,13 @@
 import com.chinamcloud.spider.ConfigSpider;
 import com.chinamcloud.spider.model.Extract;
 import com.chinamcloud.spider.model.PageModel;
+import com.chinamcloud.spider.orm.redis.RedisPool;
 import com.chinamcloud.spider.pipeline.MongoPipeline;
-import com.chinamcloud.spider.redis.RedisPool;
 import com.chinamcloud.spider.scheduler.RedisScheduler;
 import us.codecraft.webmagic.Site;
-
 import java.util.Arrays;
 
 public class SoHuNewsTest {
-
-
     public static void main(String[] args) {
 
         PageModel pageModel = new PageModel();

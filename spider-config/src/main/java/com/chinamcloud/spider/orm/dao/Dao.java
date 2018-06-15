@@ -1,10 +1,10 @@
-package com.chinamcloud.spider.dao;
+package com.chinamcloud.spider.orm.dao;
 
 
-import com.chinamcloud.spider.mongo.MongoJDBC;
+import com.chinamcloud.spider.orm.mongo.MongoJDBC;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.codecs.configuration.CodecRegistry;
+
 
 public class Dao {
 
