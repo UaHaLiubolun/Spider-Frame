@@ -12,8 +12,7 @@ public class RunInfoDao extends Dao{
     {
         collection = getCollection("spiderRunInfo", SpiderRunInfo.class);
     }
-
-
+    
     public boolean add(SpiderRunInfo spiderRunInfo) {
         try {
             collection.insertOne(spiderRunInfo);
