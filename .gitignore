@@ -14,4 +14,7 @@
 /spider-config/target/
 /spider-manage/target/
 /spider-manage/spider-manage.iml
+.Ds_Store
+/spider-core/.Ds_Store
+/spider-core/src/.Ds_Store
 spider-frame.iml
