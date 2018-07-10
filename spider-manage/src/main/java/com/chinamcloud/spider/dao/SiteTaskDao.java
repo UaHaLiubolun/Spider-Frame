@@ -34,6 +34,39 @@ public class SiteTaskDao extends Dao {
         return false;
     }
 
+    public List<SiteTask> getAll() {
+        List<SiteTask> siteTasks = new ArrayList<>();
+        try {
+            MongoCursor<SiteTask> taskMongoCursor =
+                    collection.find().iterator();
+            while (taskMongoCursor.hasNext()) {
+                siteTasks.add(taskMongoCursor.next());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return siteTasks;
+    }
+
+    public boolean modify(String domain, SiteTask siteTask) {
+        try {
+            UpdateResult updateResult =
+                    collection.updateOne(eq("site.domain", domain),
+                            combine(
+                                    set("threadNum", siteTask.getThreadNum()),
+                                    set("site", siteTask.getSite()),
+                                    set("interval", siteTask.getInterval()),
+                                    set("pageModels", siteTask.getPageModels()),
+                                    set("isOn", siteTask.isOn()),
+                                    set("startUrls", siteTask.getStartUrls())
+                                    ));
+            if (updateResult.getModifiedCount() == 1) return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public List<SiteTask> getOn() {
         List<SiteTask> siteTasks = new ArrayList<>();
         try {
@@ -59,8 +92,6 @@ public class SiteTaskDao extends Dao {
         }
         return result;
     }
-
-
 
     public boolean endRun(String domain) {
         boolean result = false;

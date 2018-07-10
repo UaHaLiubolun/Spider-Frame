@@ -17,4 +17,7 @@
 .Ds_Store
 /spider-core/.Ds_Store
 /spider-core/src/.Ds_Store
+/spider-api/.Ds_Store
+/spider-api/target/
+/spider-api/spider-api.iml
 spider-frame.iml

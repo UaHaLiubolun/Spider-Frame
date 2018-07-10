@@ -30,7 +30,7 @@ public class SiteTaskTest {
         siteTaskHuPu.setLastTime((int)(new Date().getTime() / 1000) - 61);
         siteTaskHuPu.setInterval(60);
         siteTaskHuPu.setStartUrls(Arrays.asList("https://bbs.hupu.com/all-gambia"));
-        siteTaskDao.add(siteTaskHuPu);
+//        siteTaskDao.add(siteTaskHuPu);
 
 
         SiteTask siteTaskSohu = new SiteTask();

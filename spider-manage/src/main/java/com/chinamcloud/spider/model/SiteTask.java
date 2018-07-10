@@ -14,7 +14,7 @@ public class SiteTask {
 
     // 线程池大小
     private int threadNum = 1;
-    // 间隔时间
+    // 间隔时间 s
     private int interval = 60 * 60;
     // Site
     private Site site;

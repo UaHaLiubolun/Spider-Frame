@@ -8,10 +8,12 @@
     <artifactId>spider-frame</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>spider-core</module>
         <module>spider-config</module>
         <module>spider-manage</module>
+        <module>spider-api</module>
     </modules>
 
     <dependencyManagement>
@@ -117,6 +119,14 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>1.7.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.3.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
