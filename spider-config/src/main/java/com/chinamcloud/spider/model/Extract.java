@@ -1,18 +1,71 @@
 package com.chinamcloud.spider.model;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public class Extract {
 
     private String value;
 
     private String filed;
 
-    public static enum  Type {XPath, Regex, Css, JsonPath};
+    public static enum  Type {
+        XPath("XPath"), Regex("Regex"), Css("Css"), JsonPath("JsonPath");
+
+        @JsonCreator
+        public static Type getType(String value) {
+            for (Type tmp : values()) {
+                if (tmp.getValue().equals(value)) {
+                    return tmp;
+                }
+            }
+            return null;
+        }
+
+
+        private String value;
+
+        Type(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    };
 
     private Type type = Type.XPath;
 
     public static enum Source {
-        Html, Url, RawHtml, RawText
+        Html("Html"), Url("Url"), RawHtml("RawHtml"), RawText("RawText");
+
+        @JsonCreator
+        public static Source getSource(String value) {
+            for (Source tmp : values()) {
+                if (tmp.getValue().equals(value)) {
+                    return tmp;
+                }
+            }
+            return null;
+        }
+
+        private String value;
+
+        Source(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
     }
 
     private Source source = Source.Html;

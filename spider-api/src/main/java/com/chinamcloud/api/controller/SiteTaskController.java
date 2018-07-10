@@ -29,4 +29,10 @@ public class SiteTaskController {
         return isSuccess ? CodeResult.successResult() : CodeResult.failedResult("failed");
     }
 
+    @PostMapping()
+    public CodeResult add(@RequestBody SiteTask siteTask) {
+        boolean isSuccess = siteTaskDao.add(siteTask);
+        return isSuccess ? CodeResult.successResult() : CodeResult.failedResult("failed");
+    }
+
 }
