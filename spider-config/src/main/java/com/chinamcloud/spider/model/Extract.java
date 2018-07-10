@@ -21,6 +21,16 @@ public class Extract {
 
     private boolean notNull = false;
 
+    private DataConversion dataConversion = null;
+
+    public DataConversion getDataConversion() {
+        return dataConversion;
+    }
+
+    public void setDataConversion(DataConversion dataConversion) {
+        this.dataConversion = dataConversion;
+    }
+
     public String getFiled() {
         return filed;
     }

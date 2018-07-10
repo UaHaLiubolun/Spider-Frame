@@ -1,11 +1,13 @@
 package com.chinamcloud.spider.handle;
 
 
+import com.chinamcloud.spider.model.DataConversion;
 import com.chinamcloud.spider.model.Extract;
 import com.chinamcloud.spider.model.PageModel;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.selector.Selector;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +21,13 @@ public class PageModelExtractor {
     public PageModel getPageModel() {
         return pageModel;
     }
+
+    private static Class<DataConversionUtil> dataConversionUtil;
+
+    static {
+        dataConversionUtil = DataConversionUtil.class;
+    }
+
 
     public static PageModelExtractor create(PageModel pageModel) {
         PageModelExtractor pageModelExtractor = new PageModelExtractor(pageModel);
@@ -117,9 +126,23 @@ public class PageModelExtractor {
                 if (value == null && extract.isNotNull()) {
                     return null;
                 }
+                if (extract.getDataConversion() != null) {
+                    DataConversion dataConversion = extract.getDataConversion();
+                    try {
+                        Method method = dataConversionUtil.
+                                getMethod(dataConversion.getFunction(), Object.class, String.class);
+                        Object valueC =
+                                method.invoke(dataConversionUtil.newInstance(), value, dataConversion.getExpression());
+                        value = String.valueOf(valueC);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
                 map.put(extract.getFiled(), value);
             }
         }
+        // todo
+        map.put("refererUrl", page.getRequest().getUrl());
         return map;
     }
 }
