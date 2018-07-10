@@ -23,7 +23,7 @@ public class MongoJDBC {
 
     private static MongoClient client;
     static {
-        host = "172.29.4.24";
+        host = "192.168.31.136";
         port = 27017;
         userName = "root";
         pw = "";

@@ -126,7 +126,7 @@ public class PageModelExtractor {
                 if (value == null && extract.isNotNull()) {
                     return null;
                 }
-                if (extract.getDataConversion() != null) {
+                if (extract.getDataConversion() != null && !extract.getDataConversion().getFunction().equals("")) {
                     DataConversion dataConversion = extract.getDataConversion();
                     try {
                         Method method = dataConversionUtil.
